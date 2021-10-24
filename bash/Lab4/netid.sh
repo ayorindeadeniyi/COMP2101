@@ -72,7 +72,8 @@ EOF
 #####
 
 # define the interface being summarized
-interface="eno1"
+#interface="eno1"
+interface=$(ifconfig -a | grep "Link encap:Ethernet" | awk '{print $1}')
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
 
 [ "$verbose" = "yes" ] && echo "Getting IPV4 address and name for interface $interface"
