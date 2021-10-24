@@ -72,8 +72,28 @@ fi
 # this section demonstrates doing numeric tests in bash
 
 # TASK 1: Improve it by getting the user to give us the numbers to use in our tests
+echo "Enter number"
+read num1
+echo "Enter number"
+read num2
 # TASK 2: Improve it by adding a test to tell the user if the numbers are even or odd
+if [ $((num1%2)) == 0  ]; then
+	echo "$num1 is an even number"
+else
+	echo "$num1 is an odd number"
+fi
+
+if [ $((num2%2)) == 0  ]; then
+	echo "$num2 is an even number"
+else
+	echo "$num2 is an odd number"
+fi
 # TASK 3: Improve it by adding a test to tell the user is the second number is a multiple of the first number
+if [ $((num2 % num1)) == 0  ]; then
+	echo "$num2 is a multiple of first number"
+else
+	echo "$num2 is not a multiple of first number"
+fi
 
 firstNumber=4
 secondNumber=7
@@ -91,6 +111,7 @@ secondNumber=7
 
 # Test if the USER variable exists
 # TASK 1: Add a command that prints out a labelled description of what is in the USER variable, but only if it is not empty
+echo "$USER is the user"
 # TASK 2: Add a command that tells the user if the USER variable exists, but is empty
 [ -v USER ] && echo "The variable SHELL exists"
 
@@ -99,6 +120,6 @@ secondNumber=7
 # TASK 4: Use the read command to ask the user running the script to give us strings to use for the tests
 a=1
 b=01
-[ $a = $b ] && echo "$a is alphanumerically equal to $b" || echo "$a is not alphanumerically equal to $b"
-
+#[ $a = $b ] && echo "$a is alphanumerically equal to $b" || echo "$a is not alphanumerically equal to $b"
+[ $a != $b ] && echo "$a is not alphanumerically equal to $b" || echo "$a is alphanumerically equal to $b"
 

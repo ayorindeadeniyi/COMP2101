@@ -31,7 +31,7 @@ Welcome to planet $hostname, "$title $myname!"
 EOF
 
 # Task 1 Solution
-USER="dennis"
+USER="ayorindeadeniyi"
 
 # Task 2 Solution
 hostname=$(hostname)

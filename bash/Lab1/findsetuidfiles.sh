@@ -26,5 +26,5 @@ echo ""
 # sort/format whatever to display the list properly
 echo "12 largest files:"
 echo "============="
-find / -type f -printf "%s\t%p\n" -ls 2>/dev/null | sort -n | tail -12
+find / -type f -printf "%s\t%p\n" -ls 2>/dev/null | sort -n | tail -12 | awk '{print $1 "\t" $5 "\t" $6 "\t" $11}'
 echo ""

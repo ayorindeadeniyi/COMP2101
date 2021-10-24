@@ -19,7 +19,7 @@ $firstnum divided by $secondnum is $dividend
   - More precisely, it is $fpdividend
 EOF
 
-# Task 1 Solution
+# Task 1 & 2 Solution
 echo "Enter first number"
 read first_num
 echo "Enter second number"
