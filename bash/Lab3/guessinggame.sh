@@ -16,6 +16,9 @@ EOF
 
 # Pick the secret number and save it
 secretnumber=$(($RANDOM % 10 +1)) # save our secret number to compare later
+secplus=$(($secretnumber + 1))
+secminus=$(($secretnumber - 1))
+
 
 # This loop repeatedly asks the user to guess and tells them if they got the right answer
 # TASK 1: Test the user input to make sure it is not blank
@@ -24,6 +27,12 @@ secretnumber=$(($RANDOM % 10 +1)) # save our secret number to compare later
 
 read -p "Give me a number from 1 to 10: " userguess # ask for a guess
 while [[ $userguess != $secretnumber || -z "$userguess" || $userguess -gt "10" ]]; do # ask repeatedly until they get it right
+  if [[ "$userguess" == "$secplus" || "$userguess" == "$secminus" ]]; then
+	echo "You are quite near"
+  fi
+  if [[ "$userguess" > "$secplus" || "$userguess" < "$secminus" ]]; then
+	echo "You are quite far from guessing the secret number"
+  fi
   read -p "Give me a number from 1 to 10: " userguess # ask for another guess
 done
 echo "You got it! Have a milkdud."

@@ -1,4 +1,4 @@
-#!/bin/bash
+		#!/bin/bash
 #
 # This script produces a dynamic welcome message
 # it should look like
@@ -17,9 +17,9 @@
 ###############
 # Variables   #
 ###############
-title="Overlord"
-myname="dennis"
-hostname="myhostname"
+#title="Overlord"
+#myname="dennis"
+#hostname="myhostname"
 
 ###############
 # Main        #
@@ -30,7 +30,7 @@ Welcome to planet $hostname, "$title $myname!"
 
 EOF
 
-# Task 1 Solution
+																							# Task 1 Solution
 USER="ayorindeadeniyi"
 
 # Task 2 Solution
@@ -46,4 +46,25 @@ It is weekday at $date
 EOF
 
 # Task 4 Solution
-
+day=$(date +'%a, %b %d, %Y %r' | awk '{print $1}' | cut -d ',' -f1)
+if [ $day == "Mon" ]; then
+echo "Mondays is start of working day"
+fi
+if [ $day == "Tue" ]; then
+echo "Tuesday is a boring working day"
+fi
+if [ $day == "Wed" ]; then
+echo "Wednesdays bring good feelings"
+fi
+if [ $day == "Thu" ]; then
+echo "Mondays is start of working day"
+fi
+if [ $day == "Fri" ]; then
+echo "Friday is meeting deadline"
+fi
+if [ $day == "Sat" ]; then
+echo "Saturday is a refresher"
+fi
+if [ $day == "Sun" ]; then
+echo "Sundays are fun days"
+fi

@@ -12,7 +12,7 @@
 # the LAN info in this script uses a hardcoded interface name of "eno1"
 #    - change eno1 to whatever interface you have and want to gather info about in order to test the script
 
-# TASK 1: Accept options on the command line for verbose mode and an interface name
+# TASK 1: Accept options if the command line for verbose mode and an interface name
 #         If the user includes the option -v on the command line, set the varaible $verbose to contain the string "yes"
 #            e.g. network-config-expanded.sh -v
 #         If the user includes one and only one string on the command line without any option letter in front of it, only show information for that interface
@@ -27,9 +27,22 @@
 # grep is used to filter ip command output so we don't have extra junk in our output
 # stream editing with sed and awk are used to extract only the data we want displayed
 
+if [ $# -eq 0 ]; then
+    echo "No arguments supplied"
+    exit
+fi
+
 #####
 # Once per host report
 #####
+if [ $1 == "-v" ]; then
+arr=()
+while IFS= read -r line; do
+	arr+=( "$line" )
+done < <( nmcli device status | awk '{print $1}' | awk '{if(NR>1)print}' )
+for i in "${arr[@]}"
+do
+if [ $i != "lo"  ]; then
 [ "$verbose" = "yes" ] && echo "Gathering host information"
 # we use the hostname command to get our system name
 my_hostname=$(hostname)
@@ -56,6 +69,9 @@ External IP   : $external_address
 External Name : $external_name
 
 EOF
+fi
+done
+fi
 
 #####
 # End of Once per host report
@@ -72,10 +88,15 @@ EOF
 #####
 
 # define the interface being summarized
-#interface="eno1"
-interface=$(ifconfig -a | grep "Link encap:Ethernet" | awk '{print $1}')
+interface="$1"
+array=()
+while IFS= read -r line; do
+	array+=( "$line" )
+done < <( nmcli device status | awk '{print $1}' | awk '{if(NR>1)print}' )
+for i in "${array[@]}"
+do
+if [ $i == "$interface" ]; then
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
-
 [ "$verbose" = "yes" ] && echo "Getting IPV4 address and name for interface $interface"
 # Find an address and hostname for the interface being summarized
 # we are assuming there is only one IPV4 address assigned to this interface
@@ -101,6 +122,8 @@ Network Address : $network_address
 Network Name    : $network_name
 
 EOF
+fi
+done
 #####
 # End of per-interface report
 #####
